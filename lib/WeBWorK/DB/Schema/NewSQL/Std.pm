@@ -1,6 +1,6 @@
 ################################################################################
 # WeBWorK Online Homework Delivery System
-# Copyright © 2000-2007 The WeBWorK Project, http://openwebwork.sf.net/
+# Copyright Â© 2000-2007 The WeBWorK Project, http://openwebwork.sf.net/
 # $CVSHeader: webwork2/lib/WeBWorK/DB/Schema/NewSQL/Std.pm,v 1.22 2009/02/02 03:18:09 gage Exp $
 # 
 # This program is free software; you can redistribute it and/or modify it under
@@ -26,8 +26,10 @@ WeBWorK::DB::Schema::NewSQL - support SQL access to single tables.
 use strict;
 use warnings;
 use Carp qw(croak);
-use Iterator;
-use Iterator::Util;
+use lib '/usr/local/share/perl5/Iterator.pm';
+use lib '/usr/local/share/perl5/Iterator.pm';
+#use Iterator;
+#use Iterator::Util;
 use File::Temp;
 use String::ShellQuote;
 use WeBWorK::DB::Utils::SQLAbstractIdentTrans;
@@ -390,7 +392,7 @@ sub get_fields_where_i {
 	$fields ||= [$self->fields];
 	
 	my $sth = $self->_get_fields_where_prepex($fields, $where, $order);
-	return new Iterator sub {
+	return Iterator->new( sub {
 		my @row = $sth->fetchrow_array;
 		if (@row) {
 			return \@row;
@@ -399,7 +401,7 @@ sub get_fields_where_i {
 			undef $sth; # allow the statement handle to get garbage-collected
 			Iterator::is_done();
 		}
-	};
+	});
 }
 
 # helper, returns a prepared statement handle
