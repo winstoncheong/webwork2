@@ -1,6 +1,6 @@
 ################################################################################
 # WeBWorK Online Homework Delivery System
-# Copyright © 2000-2007 The WeBWorK Project, http://openwebwork.sf.net/
+# Copyright Â© 2000-2007 The WeBWorK Project, http://openwebwork.sf.net/
 # $CVSHeader: webwork2/lib/WeBWorK/DB/Schema/NewSQL/Merge.pm,v 1.11 2007/03/02 23:26:30 sh002i Exp $
 # 
 # This program is free software; you can redistribute it and/or modify it under
@@ -27,8 +27,10 @@ an SQL database.
 use strict;
 use warnings;
 use Carp qw(croak);
-use Iterator;
-use Iterator::Util;
+use lib '/usr/local/share/perl5/Iterator.pm'
+use lib '/usr/local/share/perl5/Iterator/Util.pm'
+#use Iterator;
+#use Iterator::Util;
 use WeBWorK::DB::Utils::SQLAbstractIdentTrans;
 use WeBWorK::Debug;
 
